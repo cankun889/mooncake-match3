@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>主界面</title>
+  <link rel="stylesheet" href="common.css" />
+</head>
+<body>
+  <div class="screen" id="shot">
+    <div class="moon-glow"></div>
+    <div class="star" style="left:28px;top:24px"></div>
+    <div class="star" style="left:92px;top:18px;opacity:.7"></div>
+    <div class="star" style="left:188px;top:22px"></div>
+    <div class="star" style="left:278px;top:28px;opacity:.4"></div>
+    <div class="star" style="left:56px;top:58px"></div>
+    <div class="hud">
+      <div class="hud-title">月饼消消乐</div>
+      <div class="hud-level">初月</div>
+      <div class="hud-row">
+        分数 <b>320</b>
+        步数 <b>12</b>
+      </div>
+      <div class="goal">分数 <span>320/800</span></div>
+      <div class="hint-btn">提示x3</div>
+    </div>
+    <div class="board" id="board"></div>
+  </div>
+  <script>
+    const kinds = [
+      [1,'round','ds'],[2,'flower','lr'],[3,'round','yh'],[4,'square','wr'],[5,'oval','bp'],[1,'round','ds'],
+      [2,'flower','lr'],[5,'oval','bp'],[1,'round','ds'],[3,'round','yh'],[2,'flower','lr'],[4,'square','wr'],
+      [3,'round','yh'],[4,'square','wr'],[2,'flower','lr'],[5,'oval','bp'],[1,'round','ds'],[3,'round','yh'],
+      [5,'oval','bp'],[1,'round','ds'],[4,'square','wr'],[2,'flower','lr'],[3,'round','yh'],[5,'oval','bp'],
+      [2,'flower','lr'],[3,'round','yh'],[1,'round','ds'],[5,'oval','bp'],[4,'square','wr'],[2,'flower','lr'],
+      [4,'square','wr'],[5,'oval','bp'],[3,'round','yh'],[1,'round','ds'],[2,'flower','lr'],[4,'square','wr'],
+      [1,'round','ds'],[2,'flower','lr'],[5,'oval','bp'],[3,'round','yh'],[4,'square','wr'],[1,'round','ds'],
+    ];
+    const nuts = ['#6B3A18','#C87830','#F0E0B8','#B86838','#8B5A2B'];
+    const board = document.getElementById('board');
+    kinds.forEach((k, i) => {
+      const tile = document.createElement('div');
+      tile.className = 'tile' + (i === 14 ? ' sel' : '');
+      const cake = document.createElement('div');
+      cake.className = `cake ${k[1]} k${k[0]}`;
+      const face = document.createElement('div');
+      face.className = 'face';
+      cake.appendChild(face);
+      const stamp = document.createElement('div');
+      stamp.className = `stamp ${k[2]}`;
+      if (k[2] === 'wr') {
+        for (let n = 0; n < 4; n++) {
+          const d = document.createElement('i');
+          d.style.background = nuts[n];
+          stamp.appendChild(d);
+        }
+      }
+      cake.appendChild(stamp);
+      tile.appendChild(cake);
+      board.appendChild(tile);
+    });
+  </script>
+</body>
+</html>

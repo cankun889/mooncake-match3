@@ -1,0 +1,40 @@
+// ── Panel theme tokens ──────────────────────────────────────────────────────
+// These CSS custom properties are the single source of truth for the panel's
+// color palette. All .module.less files reference them via var(--app-X).
+// Customize here to change the overall visual style of your panel.
+//
+// Dark mode: add a :root[theme='dark'] { } block below with overrides.
+// The Tuya App sets [theme='dark'] on :root when the user's system is in
+// dark mode; local web preview responds to prefers-color-scheme via ty-shim.
+:root {
+  // Background
+  --app-B1: #ffffff;         // Card / surface background
+  --app-B2: #f5f5f5;         // Page background
+
+  // Text
+  --app-T1: #1a1a1a;         // Primary text
+  --app-T2: #666666;         // Secondary text
+  --app-T3: #999999;         // Hint / caption text
+
+  // Accent
+  --app-M4: #ff7a45;         // Brand / accent color (Tuya orange default)
+}
+
+// ── Dark mode overrides ──────────────────────────────────────────────────────
+// Tuya App sets [theme='dark'] on :root when the user's system is dark.
+// For local web preview, ty-shim.ts mirrors prefers-color-scheme to this
+// attribute so the same CSS selector works in both environments.
+:root[theme='dark'] {
+  --app-B1: #1e1e1e;
+  --app-B2: #131313;
+  --app-T1: #f0f0f0;
+  --app-T2: #aaaaaa;
+  --app-T3: #666666;
+  --app-M4: #ff7a45;
+}
+
+// ── Global page style ────────────────────────────────────────────────────────
+page {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  background-color: var(--app-B2);
+}

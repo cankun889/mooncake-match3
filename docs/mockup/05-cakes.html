@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>五种月饼</title>
+  <link rel="stylesheet" href="common.css" />
+  <style>
+    .gallery {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 18px; padding: 20px;
+    }
+    h1 { color: #E8C872; font-size: 18px; }
+    .row { display: flex; gap: 14px; align-items: flex-end; }
+    .item { text-align: center; width: 52px; }
+    .item p { margin-top: 8px; font-size: 11px; color: #9BB0C9; }
+    .item .tile { margin: 0 auto; }
+    .note { font-size: 11px; color: #9BB0C9; text-align: center; line-height: 1.5; max-width: 280px; }
+  </style>
+</head>
+<body>
+  <div class="screen" id="shot">
+    <div class="moon-glow"></div>
+    <div class="gallery">
+      <h1>五种月饼图鉴</h1>
+      <div class="row" id="row"></div>
+      <p class="note">圆模 · 花瓣模 · 流心蛋黄 · 方模五仁 · 扁圆冰皮<br/>相邻交换，三连及以上消除</p>
+    </div>
+  </div>
+  <script>
+    const items = [
+      [1,'round','ds','豆沙'],
+      [2,'flower','lr','莲蓉'],
+      [3,'round','yh','蛋黄'],
+      [4,'square','wr','五仁'],
+      [5,'oval','bp','冰皮'],
+    ];
+    const nuts = ['#6B3A18','#C87830','#F0E0B8','#B86838'];
+    const row = document.getElementById('row');
+    items.forEach((k) => {
+      const item = document.createElement('div');
+      item.className = 'item';
+      const tile = document.createElement('div');
+      tile.className = 'tile';
+      const cake = document.createElement('div');
+      cake.className = `cake ${k[1]} k${k[0]}`;
+      cake.innerHTML = '<div class="face"></div>';
+      const stamp = document.createElement('div');
+      stamp.className = `stamp ${k[2]}`;
+      if (k[2] === 'wr') {
+        for (let n = 0; n < 4; n++) {
+          const d = document.createElement('i');
+          d.style.background = nuts[n];
+          stamp.appendChild(d);
+        }
+      }
+      cake.appendChild(stamp);
+      tile.appendChild(cake);
+      item.appendChild(tile);
+      const p = document.createElement('p');
+      p.textContent = k[3];
+      item.appendChild(p);
+      row.appendChild(item);
+    });
+  </script>
+</body>
+</html>

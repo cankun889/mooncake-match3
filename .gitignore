@@ -1,0 +1,30 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.vscode/*.log
+
+# TuyaOpen IDE — machine-local (auto-generated)
+.tuyaopen/ide/
+
+# Local AI agent skill caches (not part of firmware)
+.agents/
+.claude/
+
+# Build / flash artifacts
+source/embedded/.build/
+source/embedded/dist/
+**/build/
+**/.cache/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Secrets / credentials (never commit)
+.env
+*.pem
+*credentials*

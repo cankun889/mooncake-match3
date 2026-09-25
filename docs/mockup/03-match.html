@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>消除特效</title>
+  <link rel="stylesheet" href="common.css" />
+</head>
+<body>
+  <div class="screen" id="shot">
+    <div class="moon-glow"></div>
+    <div class="star" style="left:92px;top:18px"></div>
+    <div class="star" style="left:278px;top:28px"></div>
+    <div class="hud">
+      <div class="hud-title">月饼消消乐</div>
+      <div class="hud-level">初月</div>
+      <div class="hud-row">
+        分数 <b>540</b>
+        步数 <b>9</b>
+      </div>
+      <div class="goal">分数 <span>540/800</span></div>
+      <div class="hint-btn">提示x3</div>
+    </div>
+    <div class="board" id="board"></div>
+    <div class="caption">消除：金环扩散 + 金粉碎屑 + 音效</div>
+  </div>
+  <script>
+    const kinds = [
+      [1,'round','ds'],[2,'flower','lr'],[5,'oval','bp'],[4,'square','wr'],[5,'oval','bp'],[1,'round','ds'],
+      [2,'flower','lr'],[5,'oval','bp'],[1,'round','ds'],[4,'square','wr'],[2,'flower','lr'],[4,'square','wr'],
+      [3,'round','yh'],[3,'round','yh'],[3,'round','yh'],[5,'oval','bp'],[1,'round','ds'],[2,'flower','lr'],
+      [5,'oval','bp'],[1,'round','ds'],[4,'square','wr'],[2,'flower','lr'],[1,'round','ds'],[5,'oval','bp'],
+      [2,'flower','lr'],[4,'square','wr'],[1,'round','ds'],[5,'oval','bp'],[4,'square','wr'],[2,'flower','lr'],
+      [4,'square','wr'],[5,'oval','bp'],[2,'flower','lr'],[1,'round','ds'],[2,'flower','lr'],[4,'square','wr'],
+      [1,'round','ds'],[2,'flower','lr'],[5,'oval','bp'],[4,'square','wr'],[4,'square','wr'],[1,'round','ds'],
+    ];
+    const popIdx = new Set([12, 13, 14]);
+    const nuts = ['#6B3A18','#C87830','#F0E0B8','#B86838'];
+    const board = document.getElementById('board');
+    kinds.forEach((k, i) => {
+      const tile = document.createElement('div');
+      tile.className = 'tile' + (popIdx.has(i) ? ' pop' : '');
+      const cake = document.createElement('div');
+      cake.className = `cake ${k[1]} k${k[0]}`;
+      cake.innerHTML = '<div class="face"></div>';
+      const stamp = document.createElement('div');
+      stamp.className = `stamp ${k[2]}`;
+      if (k[2] === 'wr') {
+        for (let n = 0; n < 4; n++) {
+          const d = document.createElement('i');
+          d.style.background = nuts[n];
+          stamp.appendChild(d);
+        }
+      }
+      cake.appendChild(stamp);
+      tile.appendChild(cake);
+      if (popIdx.has(i)) {
+        const fx = document.createElement('div');
+        fx.className = 'fx';
+        tile.appendChild(fx);
+        [[-8,-10],[10,-8],[14,2],[8,12],[-10,10],[-14,0]].forEach(([x,y], n) => {
+          const s = document.createElement('div');
+          s.className = 'spark';
+          s.style.left = (20 + x) + 'px';
+          s.style.top = (20 + y) + 'px';
+          s.style.background = n % 2 ? '#FFF0C0' : '#E8C872';
+          tile.appendChild(s);
+        });
+      }
+      board.appendChild(tile);
+    });
+  </script>
+</body>
+</html>

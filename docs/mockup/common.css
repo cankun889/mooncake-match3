@@ -1,0 +1,202 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  width: 320px;
+  height: 480px;
+  overflow: hidden;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  background: #0B1020;
+  color: #FFF3D1;
+}
+.screen {
+  position: relative;
+  width: 320px;
+  height: 480px;
+  background: radial-gradient(ellipse at 50% 35%, #1a2740 0%, #0B1020 70%);
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: #FFF3D1;
+  opacity: 0.55;
+}
+.moon-glow {
+  position: absolute;
+  left: 70px; top: 150px;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: rgba(245, 226, 164, 0.08);
+  pointer-events: none;
+}
+.hud {
+  position: absolute;
+  left: 10px; top: 10px;
+  width: 300px; height: 84px;
+  background: #1A2438;
+  border: 2px solid #3A4A63;
+  border-radius: 16px;
+  padding: 8px 12px;
+}
+.hud-title { color: #E8C872; font-size: 16px; font-weight: 700; }
+.hud-level { position: absolute; right: 14px; top: 10px; color: #FFF3D1; font-size: 14px; }
+.hud-row { margin-top: 10px; font-size: 12px; color: #9BB0C9; display: flex; gap: 10px; align-items: baseline; }
+.hud-row b { color: #FFF3D1; font-size: 14px; font-family: Consolas, monospace; }
+.goal { margin-top: 4px; font-size: 12px; color: #E8C872; }
+.goal span { color: #FFF3D1; font-family: Consolas, monospace; margin-left: 6px; }
+.hint-btn {
+  position: absolute; right: 10px; bottom: 8px;
+  width: 80px; height: 28px;
+  border-radius: 12px;
+  border: 2px solid #E8C872;
+  background: #3A4A63;
+  color: #FFF3D1;
+  font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.board {
+  position: absolute;
+  left: 14px; top: 94px;
+  width: 292px; height: 342px;
+  background: #243147;
+  border: 2px solid #C9A24A;
+  border-radius: 16px;
+  padding: 8px;
+  display: grid;
+  grid-template-columns: repeat(6, 44px);
+  grid-template-rows: repeat(7, 44px);
+  gap: 3px;
+  justify-content: center;
+  align-content: start;
+}
+.tile {
+  width: 44px; height: 44px;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.cake {
+  position: relative;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.25);
+}
+.cake.round {
+  width: 40px; height: 40px; border-radius: 50%;
+}
+.cake.flower {
+  width: 40px; height: 40px; border-radius: 50%;
+}
+.cake.flower::before {
+  content: "";
+  position: absolute; inset: -3px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 0%, var(--ring) 0 7px, transparent 8px),
+    radial-gradient(circle at 85% 15%, var(--ring) 0 7px, transparent 8px),
+    radial-gradient(circle at 100% 50%, var(--ring) 0 7px, transparent 8px),
+    radial-gradient(circle at 85% 85%, var(--ring) 0 7px, transparent 8px),
+    radial-gradient(circle at 50% 100%, var(--ring) 0 7px, transparent 8px),
+    radial-gradient(circle at 15% 85%, var(--ring) 0 7px, transparent 8px),
+    radial-gradient(circle at 0% 50%, var(--ring) 0 7px, transparent 8px),
+    radial-gradient(circle at 15% 15%, var(--ring) 0 7px, transparent 8px);
+  z-index: -1;
+}
+.cake.square {
+  width: 38px; height: 38px; border-radius: 7px;
+}
+.cake.oval {
+  width: 40px; height: 32px; border-radius: 50%;
+}
+.cake .face {
+  position: absolute; inset: 3px;
+  border-radius: inherit;
+  background: linear-gradient(180deg, var(--light) 0%, var(--face) 40%, var(--shadow) 100%);
+  box-shadow: inset 0 -4px 6px rgba(0,0,0,0.18), inset 0 3px 4px rgba(255,255,255,0.25);
+}
+.cake.round, .cake.flower { background: var(--ring); }
+.cake.square, .cake.oval { background: var(--ring); }
+
+/* kinds */
+.k1 { --face:#C47A3A; --ring:#7A4520; --shadow:#8E5528; --light:#E0A868; }
+.k2 { --face:#EBC46A; --ring:#B07A28; --shadow:#C89440; --light:#FFF0B8; }
+.k3 { --face:#DFA24A; --ring:#9A6828; --shadow:#B87830; --light:#F0C878; }
+.k4 { --face:#C9925C; --ring:#8A5A32; --shadow:#A07040; --light:#E8C090; }
+.k5 { --face:#F6EEE8; --ring:#D4C2B6; --shadow:#E0D0C8; --light:#FFFFFF; }
+
+.stamp {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; z-index: 2; pointer-events: none;
+}
+.stamp.ds { /* 豆沙花心 */
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #5A2E14; border: 2px solid #6A3818;
+  box-shadow: 0 0 0 4px rgba(106,56,24,0.25);
+}
+.stamp.lr::before {
+  content: "❀"; color: #D49838; font-size: 14px;
+}
+.stamp.yh {
+  width: 16px; height: 16px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #FFF6C8, #FFD040 45%, #F0A820 80%);
+  box-shadow: 0 0 0 3px #F4C878;
+}
+.stamp.wr {
+  width: 22px; height: 22px;
+  border: 1.5px solid rgba(138,90,48,0.55);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px; padding: 2px;
+}
+.stamp.wr i {
+  display: block; width: 4px; height: 4px; border-radius: 50%; margin: auto;
+}
+.stamp.bp::before { content: "🍃"; font-size: 12px; filter: grayscale(0.2); }
+
+.sel {
+  outline: 3px solid #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(232,200,114,0.7);
+}
+.hint {
+  outline: 3px solid #E8C872;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(232,200,114,0.85);
+  animation: pulse 0.9s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 8px rgba(232,200,114,0.5); }
+  50% { box-shadow: 0 0 16px rgba(232,200,114,1); }
+}
+.pop .cake { opacity: 0.55; transform: scale(0.78); }
+.fx {
+  position: absolute; inset: -4px;
+  border: 3px solid #FFE08A;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #FFF6D0;
+  animation: ring 0.5s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes ring {
+  from { transform: scale(0.6); opacity: 1; }
+  to { transform: scale(1.35); opacity: 0; }
+}
+.spark {
+  position: absolute; width: 5px; height: 5px; border-radius: 50%;
+  background: #E8C872; box-shadow: 0 0 4px #FFF0C0;
+}
+.overlay {
+  position: absolute; inset: 0;
+  background: rgba(5,8,15,0.7);
+  display: flex; align-items: center; justify-content: center;
+}
+.dialog {
+  width: 248px; height: 150px;
+  background: #1A2438;
+  border: 2px solid #E8C872;
+  border-radius: 16px;
+  text-align: center;
+  padding-top: 36px;
+}
+.dialog h2 { color: #E8C872; font-size: 22px; margin-bottom: 20px; }
+.dialog p { color: #FFF3D1; font-size: 15px; }
+.caption {
+  position: absolute; left: 0; right: 0; bottom: 8px;
+  text-align: center; font-size: 11px; color: #9BB0C9;
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://schemas.tuyaopen.dev/status.v1.json",
+  "schemaVersion": 1,
+  "lifecycle": "flashed",
+  "scaffold": {
+    "method": "sdk-template-copy",
+    "sourceTemplate": "base",
+    "scaffoldedAt": "2026-09-23T13:08:07.930Z",
+    "sdkRoot": "C:\\Users\\20126\\TuyaOpenIDE\\TuyaOpenSDK",
+    "kconfigId": "TUYA_T5AI_BOARD"
+  },
+  "build": {
+    "lastResult": "success",
+    "lastBuildAt": "2026-09-23T14:08:00Z",
+    "artifact": "source/embedded/dist/moon_1.0.0/moon_QIO_1.0.0.bin",
+    "warnings": 0,
+    "errors": 0
+  },
+  "flash": {
+    "lastResult": "success",
+    "lastFlashAt": "2026-09-25T07:51:00Z",
+    "target": "moon_QIO_1.0.0.bin",
+    "port": "COM4"
+  },
+  "lastChecked": {
+    "tos": null,
+    "env": null
+  }
+}

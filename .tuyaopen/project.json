@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.tuyaopen.dev/project.v1.json",
+  "schemaVersion": 1,
+  "name": "moon",
+  "description": "中秋月饼消消乐，跑在 T5AI 3.5 寸触摸屏上。",
+  "version": "0.1.0",
+  "type": "tuyaopen-app",
+  "framework": "base",
+  "createdAt": "2026-09-23T13:08:07.930Z",
+  "createdBy": {
+    "tool": "tuyaopen-ide",
+    "version": "0.1.1"
+  },
+  "updatedAt": "2026-09-23T13:08:07.930Z",
+  "license": "Apache-2.0",
+  "tags": [],
+  "ai": {
+    "agents": [
+      "cursor",
+      "claude-code"
+    ],
+    "skills": [],
+    "notes": "Canonical project descriptor consumed by AI coding agents. Update `version`, `tags`, and `ai.skills` as the project evolves. Do not delete `schemaVersion` — the IDE uses it to migrate."
+  }
+}

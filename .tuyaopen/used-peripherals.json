@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-23T13:40:00Z",
+  "source": "vibe",
+  "peripherals": [
+    "display-rgb-main",
+    "touchpad",
+    "led",
+    "button",
+    "audio"
+  ]
+}
